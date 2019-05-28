@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Percolation",
+            "request": "launch",
+            "mainClass": "Percolation",
+            "projectName": "UnionFind"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Percolation",
+            "request": "launch",
+            "mainClass": "Percolation",
+            "projectName": "UnionFind_d3dac686"
+        }
+    ]
+}
