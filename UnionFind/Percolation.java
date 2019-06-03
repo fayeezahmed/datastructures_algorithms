@@ -2,8 +2,8 @@ import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
-// PREV: Created virtual top and bottom sites that are connected to bottom row. xyTo1D()
-// TODO: Use this new virtual top and bottom to make it work?!
+// PREV: Used virtual sites to test if system percolates. It works 
+// TODO: isFull actually checks the current site with the virtual top site. Implement this.
 
 public class Percolation {
     public int[][] grid;
@@ -35,8 +35,6 @@ public class Percolation {
         for (i=wu.length-2; i>((wu.length-2) - grid.length); i--){
             wqu.union(wu[wu.length-1], wu[i]);
         }
-        //System.out.println(wu[wu.length-4]);
-        //System.out.println(wqu.connected(wu[wu.length-1], wu[wu.length-4]));
         openSites = wu;
         for (i=0; i<openSites.length-1; i++){
             openSites[i] = 0;
@@ -66,11 +64,9 @@ public class Percolation {
         }
         // create private method to go from 2d array to 1d array
         xyTo1D();
-        //wqu.union(grid[0][0]);
-
     }
 
-    public void printGrid() {
+    private void printGrid() {
         System.out.println("\n");
         for (i=0; i<grid.length; i++){
             for (j=0; j<grid[i].length; j++){
@@ -84,7 +80,7 @@ public class Percolation {
         // TODO: convert the coords here to 1d and then return those
         //       they can be used to determine if sites are open
         int index = find1dIndex(row, col);
-        
+        // TODO: refactor to merge if statements 
         switch (adj){
             case "up":
                 if ( validateIndex(row-1)) {
@@ -155,7 +151,7 @@ public class Percolation {
         return openSites[index] == 1 ? true : false;
     }
     public boolean isFull(int row, int col)  {
-        // is the virtual top and virtual bottom connected?
+        // is the site connected to the virtual top site?
         return wqu.connected(row, col);
     }
     public int numberOfOpenSites()  { 
@@ -174,9 +170,9 @@ public class Percolation {
         Percolation percolation = new Percolation(3);
         percolation.open(1, 0);
         System.out.println("is wqu connected?  " + percolation.wqu.connected(3, 0));
-        percolation.open(0,0); // connected not working properly
-        percolation.open(1,0); // connected not working properly
-        percolation.open(2,0); // connected not working properly
+        percolation.open(0,0); 
+        percolation.open(1,0); 
+        percolation.open(2,0); 
         System.out.println("is site open?  " + percolation.openSites[0]);
         System.out.println("does system percolate? " + percolation.percolates());
     }
